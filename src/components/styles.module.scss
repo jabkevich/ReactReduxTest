@@ -28,6 +28,23 @@
       color: #698474;
       padding: 16px 32px;
       font-size: 30px;
+      width: 100%;
+    }
+    .Editing{
+      width: 100%;
+      display: flex;
+      .DefaultState{
+        background: #bac7a7;
+        margin: 5px;
+        width: 40%;
+        text-align: center;
+      }
+      .prevState, .nextState{
+        background: #bac7a7;
+        margin: 5px;
+        width: 30%;
+        text-align: center;
+      }
     }
     .Error{
       height: 10px;
