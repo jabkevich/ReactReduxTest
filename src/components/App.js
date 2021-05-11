@@ -14,12 +14,7 @@ const App = props=> {
     const [url, setUrl] = useState("")
     const idSelect = useSelector(state=>state.data.idSelect)
     const idCases = useSelector(state=>state.data.idCases)
-    // const [cases, setCases] = useState([])
-    // const [selected, setSelected] = useState("")
 
-    // useEffect(() => {
-    //     dispatch(get_data());
-    // }, [dispatch])
     const download = () =>{
         DefaultState()
         url === "" ? dispatch(get_data_and_sort()):dispatch(get_data_and_sort(url));

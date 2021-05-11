@@ -13,6 +13,7 @@ import {
     SET_SELECTED
 } from "./types";
 
+
 const initialState = {
     data_from_res: null,
     data_smosh: null,
@@ -64,12 +65,20 @@ export const data_reducer = (state=initialState, action)=>{
             return setState(state, -1)
         case ADD_STATE:
             const states = [...state.states]
-            states[state.head+1] = action.payload
+            let headplus
+            if(state.head+1 === 10){
+                states.shift()
+                states[state.head] = action.payload
+                headplus = 0
+            }else{
+                states[state.head+1] = action.payload
+                headplus = 1
+            }
             return {
                 ...state,
                 states: states,
-                head: state.head+1,
-                size: state.head+1
+                head: state.head+headplus,
+                size: state.head+headplus
             }
         case SET_CASES:
             console.log(action.payload.idCases)
@@ -77,6 +86,8 @@ export const data_reducer = (state=initialState, action)=>{
                 ...state,
                 cases: action.payload.cases,
                 idCases: action.payload.idCases,
+                idSelect: "DEFAULT",
+                selected: null
 
             }
         case SET_SELECTED:
