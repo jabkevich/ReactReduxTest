@@ -1,0 +1,15 @@
+.Container{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  .Input{
+    width: 50%;
+    height: 100%;
+    background: #698474;
+  }
+  .Output{
+    width: 50%;
+    height: 100%;
+    background: #889e81;
+  }
+}
