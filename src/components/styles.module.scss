@@ -1,0 +1,77 @@
+.Container{
+  height: 100%;
+  width: 100%;
+  display: flex;
+  .Input{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 20%;
+    height: 100%;
+    background: #698474;
+    .InputUrl{
+      border:0; // remove default border
+      border-bottom:1px solid #eee;
+      padding:10px;
+      border-radius:10px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    .Button{
+      justify-self: center;
+      appearance: none;
+      border: 0;
+      border-radius: 5px;
+      background: #e5e4cc;
+      color: #698474;
+      padding: 16px 32px;
+      font-size: 30px;
+    }
+    .Error{
+      height: 10px;
+      width: 100%;
+      text-align: center;
+      p{
+        color: #e5e4cc;
+        font-size: 30px;
+      }
+    }
+  }
+  .Output{
+    padding: 20px;
+    width: 80%;
+    height: 100%;
+    background: #889e81;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    .Selects{
+      display: flex;
+      justify-content: space-between;
+      .Select{
+        display: block;
+        width: 100%;
+        padding: .75rem 2.5rem .75rem 1rem;
+        background: #e5e4cc;
+        border: 1px solid #ccc;
+        border-radius: 3px;
+        -webkit-appearance: none;
+        appearance: none;
+        font-family: inherit;
+        font-size: 1rem;
+        color: #444;
+      }
+    }
+    .selected{
+      margin-bottom:auto ;
+      margin-top: auto;
+      display: flex;
+      justify-content: center;
+      font-size: 4em;
+    }
+  }
+
+}
+

@@ -1,4 +1,6 @@
 export const GET_DATA = "GET_DATA"
 export const GET_ERROR = "GET_ERROR"
 export const SMOH_DATA = "SMOH_DATA"
+export const GET_SMOSH_SORT_DATA = "GET_SMOSH_SORT_DATA"
 export const SORT_PRIMITIVE_DATA = "SORT_PRIMITIVE_DATA"
+export const CLOSE_MESSAGE = "CLOSE_MESSAGE"

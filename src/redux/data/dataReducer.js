@@ -1,10 +1,12 @@
-import {GET_DATA, GET_ERROR, SMOH_DATA, SORT_PRIMITIVE_DATA} from "./types";
+import {GET_DATA, GET_ERROR, SMOH_DATA, SORT_PRIMITIVE_DATA, GET_SMOSH_SORT_DATA, CLOSE_MESSAGE} from "./types";
 
 const initialState = {
-    data: null,
-    data1: null,
-    data2: null,
-    error: null
+    data_from_res: null,
+    data_smosh: null,
+    data_sort: null,
+    data_ready: null,
+    error: null,
+    success: null
 }
 
 export const data_reducer = (state=initialState, action)=>{
@@ -12,22 +14,34 @@ export const data_reducer = (state=initialState, action)=>{
         case GET_DATA:
             return{
                 ...state,
-                data: action.payload
+                data_from_res: action.payload
             }
         case GET_ERROR:
             return{
                 ...state,
-                error: action.payload
+                error: true
+            }
+        case CLOSE_MESSAGE:
+            return{
+                ...state,
+                error:false,
+                success: false,
             }
         case SMOH_DATA:
             return{
                 ...state,
-                data1: action.payload
+                data_smosh: action.payload
             }
         case SORT_PRIMITIVE_DATA:
             return{
                 ...state,
-                data2: action.payload
+                data_sort: action.payload
+            }
+        case GET_SMOSH_SORT_DATA:
+            return{
+                ...state,
+                data_ready: action.payload,
+                success: true
             }
         default:
             return state

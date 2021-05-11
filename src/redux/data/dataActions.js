@@ -1,4 +1,4 @@
-import {GET_DATA, GET_ERROR, SMOH_DATA, SORT_PRIMITIVE_DATA} from "./types";
+import {GET_DATA, GET_ERROR, SMOH_DATA, SORT_PRIMITIVE_DATA, GET_SMOSH_SORT_DATA, CLOSE_MESSAGE} from "./types";
 import axios from "axios";
 
 
@@ -13,7 +13,6 @@ function primitivesSort(array){
             newArray[primitives[typeof array[i]]]=[]
         newArray[primitives[typeof array[i]]].push(array[i])
     }
-    console.log("2")
     return newArray
 }
 
@@ -44,31 +43,50 @@ function smoothing(objs){
 }
 
 
-export const get_data = () =>dispatch=>{
-    axios.get("https://raw.githubusercontent.com/WilliamRu/TestAPI/master/db.json").then(res=>{
+// export const get_data = () =>dispatch=>{
+//     axios.get("https://raw.githubusercontent.com/WilliamRu/TestAPI/master/db.json").then(res=>{
+//         dispatch({
+//             type: GET_DATA,
+//             payload: res.data
+//         })
+//     }).catch(e=>{
+//         dispatch({
+//             type: GET_ERROR,
+//             payload: e.data
+//         })
+//     })
+// }
+
+// export const smoothing_data = () => (dispatch, getState) =>{
+//     dispatch({
+//         type: SMOH_DATA,
+//         payload: smoothing(getState().data.data)
+//     })
+// }
+//
+//
+// export const sort_primitive_data = () => (dispatch, getState) =>{
+//     dispatch({
+//         type: SORT_PRIMITIVE_DATA,
+//         payload: primitivesSort(getState().data.data1)
+//     })
+// }
+
+
+export const get_data_and_sort  = (url) => (dispatch) => {
+    axios.get(url?url:"https://raw.githubusercontent.com/WilliamRu/TestAPI/master/db.json").then(res=>{
         dispatch({
-            type: GET_DATA,
-            payload: res.data
+            type: GET_SMOSH_SORT_DATA,
+            payload: primitivesSort(smoothing(res.data))
         })
     }).catch(e=>{
         dispatch({
             type: GET_ERROR,
-            payload: e.data
+            payload: true
         })
     })
-}
-
-export const smoothing_data = () => (dispatch, getState) =>{
-    dispatch({
-        type: SMOH_DATA,
-        payload: smoothing(getState().data.data)
-    })
-}
-
-
-export const sort_primitive_data = () => (dispatch, getState) =>{
-    dispatch({
-        type: SORT_PRIMITIVE_DATA,
-        payload: primitivesSort(getState().data.data1)
-    })
+    setTimeout(  ()=> dispatch({
+        type: CLOSE_MESSAGE,
+        payload: false
+    }), 5000)
 }
