@@ -21,7 +21,7 @@ const initialState = {
     data_ready: null,
     error: null,
     success: null,
-    selected: null,
+    selected: [],
     cases: null,
     idSelect: "DEFAULT",
     idCases: "DEFAULT",
@@ -93,7 +93,7 @@ export const data_reducer = (state=initialState, action)=>{
         case SET_SELECTED:
             return {
                 ...state,
-                selected: action.payload.selected,
+                selected: [...state.selected, action.payload.selected],
                 idSelect: action.payload.idSelect
             }
         case GET_DATA:
@@ -121,7 +121,7 @@ export const data_reducer = (state=initialState, action)=>{
                 data_ready: null,
                 error: null,
                 success: null,
-                selected: null,
+                selected: [],
                 cases: null,
                 idSelect: "DEFAULT",
                 idCases: "DEFAULT",

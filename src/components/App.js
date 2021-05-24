@@ -9,19 +9,15 @@ const App = props=> {
     const data_ready= useSelector(state=>state.data.data_ready)
     const error= useSelector(state=>state.data.error)
     const success= useSelector(state=>state.data.success)
-    const cases= useSelector(state=>state.data.cases)
     const selected= useSelector(state=>state.data.selected)
-    const [url, setUrl] = useState("")
-    const idSelect = useSelector(state=>state.data.idSelect)
     const idCases = useSelector(state=>state.data.idCases)
 
     const download = () =>{
         DefaultState()
-        url === "" ? dispatch(get_data_and_sort()):dispatch(get_data_and_sort(url));
+        dispatch(get_data_and_sort())
     }
 
     const select = (e, index) =>{
-        console.log(e.target.value)
         if(e.target.value !=="DEFAULT" && index===0){
             dispatch(set_cases(data_ready[e.target.value], e.target.value))
         }else{
@@ -30,7 +26,6 @@ const App = props=> {
     }
 
     const DefaultState = ()=>{
-        setUrl("")
         dispatch(default_state())
     }
     const prevState = ()=>{
@@ -42,7 +37,6 @@ const App = props=> {
   return (
       <div className={styles.Container}>
           <div className={styles.Input}>
-              <input placeholder={"необязательно"} className={styles.InputUrl} type={"text"} onChange={e => setUrl(e.target.value)}/>
               <button onClick={()=>download()} className={styles.Button}>Загрузить</button>
               <div className={styles.Error}>
                   {error? <p>error</p>:""}
@@ -57,26 +51,30 @@ const App = props=> {
           <div className={styles.Output}>
               <div className={styles.Selects}>
                   {data_ready?
-                      <select value={idCases} className={styles.Select} onChange={(e)=>select(e, 0)}>
+                      data_ready.map((data, i)=>(
+                      <select value={idCases} className={styles.Select} onChange={(e)=>select(e, 2)}>
                           <option  value="DEFAULT" defaultValue>
-                              выберте тип
+                              {typeof data[0]}
                           </option>
-                          {data_ready.map((data, i)=>(
-                              <option key={i} value={i} >{typeof data[0]}</option>
-                          ))}
-                      </select>:""
-                  }
-                  {cases?
-                      <select value={idSelect} className={styles.Select} onChange={(e)=>select(e, 2)}>
-                          <option  value="DEFAULT" defaultValue>
-                              выберте тип
-                          </option>
-                          {cases.map((data, i)=> (
+                          {data.map((data, i)=> (
                               <option key={i} value={data} >{`${data}`}</option>
                           ))}
                       </select>
+                          ))
                       :""
+
                   }
+                  {/*{cases?*/}
+                  {/*    <select value={idSelect} className={styles.Select} onChange={(e)=>select(e, 2)}>*/}
+                  {/*        <option  value="DEFAULT" defaultValue>*/}
+                  {/*            выберте тип*/}
+                  {/*        </option>*/}
+                  {/*        {cases.map((data, i)=> (*/}
+                  {/*            <option key={i} value={data} >{`${data}`}</option>*/}
+                  {/*        ))}*/}
+                  {/*    </select>*/}
+                  {/*    :""*/}
+                  {/*}*/}
               </div>
               <Selected selected={selected}/>
           </div>
