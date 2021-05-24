@@ -5,13 +5,11 @@ const Selected = props=> {
         <div className={styles.selected}>
             {props.selected ?
                 props.selected.map((select, i) => (
-                    <div key={i}>{select}</div>
+                    <div key={i} className={styles.select}>{select}</div>
                 )) : ""
             }
         </div>
     );
 }
-
-
 export default Selected
 
